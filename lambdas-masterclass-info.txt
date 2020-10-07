@@ -1,0 +1,11 @@
+java lambdas and stream master class:
+
+- https://www.youtube.com/watch?v=ePXnCezwRuw
+part 2:
+
+https://www.youtube.com/watch?v=2c_KNH3s2S0
+
+GITHUG lambdas advacned:https://github.com/stuart-marks/LambdaHOLv2
+
+actual github demo code:
+part 1: https://github.com/JosePaumard/lambda-master-class-part1
