@@ -1,0 +1,16 @@
+a. Why variables used inside lambda are made final/effectively final
+		-> Meaning variables can not be modified inside , beofre or after the lambda code 
+	-> This is done so that a mehtod declared within one method cna be packed into a closure and that lambda can be passed to another higher order function and be executed there
+		-> a lambda body whihc is using a local method variable cna still be executed in another method
+		-> f variable was not final , there could be inconsitency in logic of lambda as variable got changed outside lambda before or after its execution
+		
+b. Why do we need chain creation method o use method Objects.requiresNull(chainingFunctionlaInterfaceInstance);		
+
+c. Why does map.values() method return collection and not list or set
+d. Write a program to support pagination of list of T , pass sizeperPage and pagenumber (0 based index)
+e. Why do we need int charachterstics in custom spliterator like arraylists's plitareator:
+	-> for eg: if we are using sortedset whihc have charachter bit set for sorted item
+	-> ad if we are using stream pipeline on sortedset and using operation sorted()
+		-> it will already know the intermeiate spliterator have charachterstics of sorted bit and hence no need to sort again , just go to next operation in strema pipeline
+		-> similarly for hashset if we use intermediate opeation distinct() it wont remove duplicates 
+			as hashet is already distinct and henc ebypass this operation and go for next operation

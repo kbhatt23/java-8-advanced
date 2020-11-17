@@ -1,0 +1,87 @@
+Why to use functional programming:
+a. It allows declarative approach to programming, meaning tell what to be done and hide/encapsulate how it is to be done
+	-> this increases code readability and maintainability as time passes in project
+b. less error prone
+c.less code to write
+d. making things immutable/pure function can reduce errors.
+e. making code functional can easily make things paralelle, 
+	-> code to write to run in parallel vs in single thread will be same unlike oops
+	
+- lambda is nothing but anonymous function, a function with no name
+	-> however this dfunction can be kept ina  variable and passed just like anonymous objects are passed	
+	
+- Ananomymous class creates clas with name realClassName$1.class  realClassName$2.class and so on
+	, lambda is compiled ultimately into a private method not visible to anyonw within the same class
+	- use command javap -c .class full path
+	 	
+- Lambda body is ultimately added into a method/function in the same class for sapce efficiency,
+	It uses invoke dynamic which uses targetinvokehandler of reflection api,
+	meaning at compile time the lambda body is kept the same, but at runtime invokedynamic converts it into a dynamic proxy method
+		that gets called by JVM 	 	
+		
+- Like reflection code is a biut slower than normal staitcally typed code
+	-> lambdas are a bit slower than its normal staticlaly writeen code
+		-> however it is better in space efficiency
+		-> its because invokedynamic have to do the things a compiler do at compile time 
+			but since compiler do onthing abt it and at runtime oinvoke handler do these checks and conversion of lambda to a method within the class		
+			
+			
+- Functional programming is based on Lambda calculus, 
+	a blackbox function that do not knwo anything except input, 
+	pure functions: that do not mutate input or have any kind of object state, nor they modify anything outside the blackbox
+
+- Consumer interface are always with side effects , as it takes input and do modify the input most of the time,
+	even printing the object ot console is a side effect
+	
+- Higher order functions are methods/functions which take arguments as functions/ or even return a function or both 	
+
+- Its better to do fail fast than fail later, thats why even creating the chain we shoudl throw nullpointer in case other functional interface is passed as null
+	-> as lambdas are lazy , it only gives null pointer only when executed and hence , its better to chekc this even while cretain chain methods
+	eg: andthen, andCompose of funciton interface
+
+- Variables defined outside and used inside lanbdas are final or effectively final
+	-> Meaning variables can not be modified inside , beofre or after the lambda code 
+	-> This is done so that a mehtod declared within one method cna be packed into a closure and that lambda can be passed to another higher order function and be executed there
+		-> a lambda body whihc is using a local method variable cna still be executed in another method
+		-> f variable was not final , there could be inconsitency in logic of lambda as variable got changed outside lambda before or after its execution	
+		
+- Currying is a technique to call the same method recursively for reult set
+	eg we have method sum(int a, int b) and we want sum of 10,20,30
+		-> sum(10+sum(20+30))		
+		
+Streams benefits:
+a. Declarative: hence easier to understand
+b. More flexible an maintainable: Like a sql framework
+c. no immutability and hecn less chances of bugs
+d. no immutability and hence easier to transform to run in parallel
+	-> code to write that runs in parallel is same as that runs in sequential mode		
+	
+- Streams are nothing but sequential flow of data
+	->data rouce can be file/arrays/colletions/map and even web service or D.B calls	
+	
+- //streams can be used only once -> if any operation is used,
+	//and again in same onject we try to call operation it gives unsupportedoperationexception	
+- Since stream is immutable just like optional, every operation like filter/map etc will return a new created stream object
+
+- Strem API operation methods like filter/map etc are nothing but higher order function whihc takes instance of funcational interface
+	-> input variable holding function itself
+-//boxed converts int promitive Stream to Stream<Double> or Stream<Integer>
+	//but if we want to convert intprimitve directly to some object like Stream<Book> we use maptoObject	
+		
+		
+		
+- flatmpa is used in case of Stream<Stream> or Stream<array> or Stream<List>
+	if in flat map we provide a java.util.Function instance with output as stream it merges all the dimensions and put in a single dimention
+		-> converts to Stream<?>		
+
+- Paralle stream works well and do not cause issue when:
+	a. There is no shared mutation, mutation si fine within the scope of lambda of map.flatmap methods,
+		but a object created outside the stream should not be mutated inside lambda forcefully
+		
+	b. Strema should be stateless -> lambda bodys shud not use any shared object created outside lambda body	
+	
+	- We can see the method documentation for each intermediate/terminal operations
+		we should not use paralle stream for stateful operational methods		
+		
+- Spliterator can help us create Stream from custom source like web service call/ File etc		
+- The strema api uses spliterator whihc acts like a fancy iterator while reading the data one by one
