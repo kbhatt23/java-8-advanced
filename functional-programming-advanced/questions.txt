@@ -14,3 +14,4 @@ e. Why do we need int charachterstics in custom spliterator like arraylists's pl
 		-> it will already know the intermeiate spliterator have charachterstics of sorted bit and hence no need to sort again , just go to next operation in strema pipeline
 		-> similarly for hashset if we use intermediate opeation distinct() it wont remove duplicates 
 			as hashet is already distinct and henc ebypass this operation and go for next operation
+f. does arraylist sort is faster/slower than linked list and how
